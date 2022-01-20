@@ -1,0 +1,45 @@
+{
+  "name": "hook-modal",
+  "description": "React Hooks for building accessible modal",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "author": "dqn <dqn270@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf ./dist && tsc",
+    "prepare": "yarn build",
+    "lint": "run-p lint:*",
+    "lint:tsc": "tsc --noEmit",
+    "lint:eslint": "eslint ./src"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.4"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17"
+  },
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "react",
+    "hooks",
+    "modal"
+  ]
+}
