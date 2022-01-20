@@ -11,3 +11,10 @@ extends:
 settings:
   react:
     version: "detect"
+overrides:
+  - files:
+      - "./example/**/*.{ts,tsx}"
+    rules:
+      react/jsx-uses-react: "off"
+      react/react-in-jsx-scope: "off"
+      react/prop-types: "off"
