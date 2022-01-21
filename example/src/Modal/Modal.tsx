@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const Modal: React.FC<Props> = ({ isOpen, onClose, children }) => {
-  const modal = useModal({ onClose });
+  const modal = useModal({ isOpen, onClose });
 
   if (!isOpen) {
     return null;

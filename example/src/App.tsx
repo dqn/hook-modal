@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Modal } from "./Modal";
 
 export const App: React.VFC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const open = () => {
+  const open = useCallback(() => {
     setIsOpen(true);
-  };
-  const close = () => {
+  }, []);
+  const close = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
   return (
     <main>
