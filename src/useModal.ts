@@ -6,9 +6,7 @@ import {
   useRef,
 } from "react";
 import { useAriaHidden } from "./useAriaHidden";
-import { useFocusFirstElement } from "./useFocusFirstElement";
-import { useModalKeyEvent } from "./useModalKeyEvent";
-import { useReturnFocus } from "./useReturnFocus";
+import { useFocusTrap } from "./useFocusTrap";
 
 type UseModalOptions = {
   isOpen?: boolean;
@@ -28,10 +26,8 @@ export function useModal<T extends HTMLElement = HTMLDivElement>(
   const { isOpen = true, onClose } = options;
   const ref = useRef<T>(null);
 
-  useReturnFocus(isOpen);
-  useFocusFirstElement(isOpen, ref);
   useAriaHidden(isOpen, ref);
-  useModalKeyEvent({ ref, isOpen, onClose });
+  useFocusTrap({ ref, isOpen, onClose });
 
   const onClick = useCallback<MouseEventHandler>((event) => {
     // to avoid emitting click event on the overlay
