@@ -4,7 +4,7 @@ import { focusNextElement } from "./focusNextElement";
 // auto-focus the first focusable element when the modal is opened
 export function useFocusFirstElement(
   isOpen: boolean,
-  ref: RefObject<HTMLDivElement>,
+  ref: RefObject<HTMLElement>,
 ): void {
   useEffect(() => {
     if (!isOpen || ref.current === null) {

@@ -1,20 +1,16 @@
-import { useEffect } from "react";
+import { RefObject, useEffect } from "react";
+import { hideOthers } from "aria-hidden";
 
 // set aria-hidden attribute when the modal is opened
 export function useAriaHidden(
   isOpen: boolean,
-  appElementSelector: undefined | string,
+  ref: RefObject<HTMLElement>,
 ): void {
   useEffect(() => {
-    if (!isOpen || appElementSelector === undefined) {
+    if (!isOpen || ref.current === null) {
       return;
     }
 
-    const root = document.querySelector(appElementSelector);
-    root?.setAttribute("aria-hidden", "true");
-
-    return () => {
-      root?.removeAttribute("aria-hidden");
-    };
-  }, [isOpen, appElementSelector]);
+    return hideOthers(ref.current);
+  }, [isOpen, ref]);
 }

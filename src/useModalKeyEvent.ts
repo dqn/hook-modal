@@ -4,14 +4,14 @@ import { focusNextElement } from "./focusNextElement";
 type UseModalKeyEventOptions = {
   ref: RefObject<HTMLElement>;
   isOpen: boolean;
-  onRequestClose: () => void;
+  onClose: undefined | (() => void);
 };
 
 // add key event for Esc key and Tab key
 export function useModalKeyEvent({
   ref,
   isOpen,
-  onRequestClose,
+  onClose,
 }: UseModalKeyEventOptions): void {
   useEffect(() => {
     if (!isOpen) {
@@ -22,7 +22,7 @@ export function useModalKeyEvent({
       if (event.key === "Escape") {
         // when Esc key is pressed, close the modal
         event.preventDefault();
-        onRequestClose();
+        onClose?.();
         return;
       }
 
@@ -41,5 +41,5 @@ export function useModalKeyEvent({
     return () => {
       document.body.removeEventListener("keydown", handleKeydown);
     };
-  }, [ref, isOpen, onRequestClose]);
+  }, [ref, isOpen, onClose]);
 }

@@ -11,28 +11,29 @@ import { useModalKeyEvent } from "./useModalKeyEvent";
 import { useReturnFocus } from "./useReturnFocus";
 
 type UseModalOptions = {
-  isOpen: boolean;
-  onRequestClose: () => void;
-  appElementSelector?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
 };
 
-type UseModalReturn = Pick<
-  HTMLAttributes<HTMLDivElement>,
+type UseModalReturn<T extends HTMLElement> = Pick<
+  HTMLAttributes<T>,
   "role" | "aria-modal" | "onClick"
 > & {
-  ref?: RefObject<HTMLDivElement>;
+  ref?: RefObject<T>;
 };
 
-export function useModal(options: UseModalOptions): UseModalReturn {
-  const { isOpen, onRequestClose, appElementSelector } = options;
-  const ref = useRef<HTMLDivElement>(null);
+export function useModal<T extends HTMLElement = HTMLDivElement>(
+  options: UseModalOptions,
+): UseModalReturn<T> {
+  const { isOpen = true, onClose } = options;
+  const ref = useRef<T>(null);
 
   useReturnFocus(isOpen);
   useFocusFirstElement(isOpen, ref);
-  useAriaHidden(isOpen, appElementSelector);
-  useModalKeyEvent({ ref, isOpen, onRequestClose });
+  useAriaHidden(isOpen, ref);
+  useModalKeyEvent({ ref, isOpen, onClose });
 
-  const onClick = useCallback<MouseEventHandler<HTMLDivElement>>((event) => {
+  const onClick = useCallback<MouseEventHandler>((event) => {
     // to avoid emitting click event on the overlay
     event.stopPropagation();
   }, []);
