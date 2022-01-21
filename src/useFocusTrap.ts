@@ -3,28 +3,31 @@ import { createFocusTrap } from "focus-trap"; // ESM
 
 type UseModalKeyEventOptions = {
   ref: RefObject<HTMLElement>;
-  isOpen: boolean;
-  onClose: undefined | (() => void);
+  onClose: () => void;
+  closeOnOutsideClick: boolean;
+  closeOnEsc: boolean;
 };
 
 // add key event for Esc key and Tab key
-export function useFocusTrap({
-  ref,
-  isOpen,
-  onClose,
-}: UseModalKeyEventOptions): void {
+export function useFocusTrap(options: UseModalKeyEventOptions): void {
+  const { ref, onClose, closeOnEsc, closeOnOutsideClick } = {
+    ...options,
+  };
+
   useEffect(() => {
-    if (!isOpen || ref.current === null) {
+    if (ref.current === null) {
       return;
     }
 
     const trap = createFocusTrap(ref.current, {
-      ...(onClose === undefined ? {} : { onDeactivate: onClose }),
+      onDeactivate: onClose,
+      clickOutsideDeactivates: closeOnOutsideClick,
+      escapeDeactivates: closeOnEsc,
     });
     trap.activate();
 
     return () => {
       trap.deactivate();
     };
-  }, [ref, isOpen, onClose]);
+  }, [ref, onClose, closeOnEsc, closeOnOutsideClick]);
 }

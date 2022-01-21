@@ -1,21 +1,15 @@
-import {
-  HTMLAttributes,
-  MouseEventHandler,
-  RefObject,
-  useCallback,
-  useRef,
-} from "react";
+import { HTMLAttributes, RefObject, useRef } from "react";
 import { useAriaHidden } from "./useAriaHidden";
 import { useFocusTrap } from "./useFocusTrap";
 
 type UseModalOptions = {
-  isOpen?: boolean;
-  onClose?: () => void;
+  onClose: () => void;
+  closeOnEsc?: undefined | boolean;
+  closeOnOutsideClick?: undefined | boolean;
 };
 
-type UseModalReturn<T extends HTMLElement> = Pick<
-  HTMLAttributes<T>,
-  "role" | "aria-modal" | "onClick"
+type UseModalReturn<T extends HTMLElement> = Required<
+  Pick<HTMLAttributes<T>, "role" | "aria-modal">
 > & {
   ref?: RefObject<T>;
 };
@@ -23,25 +17,15 @@ type UseModalReturn<T extends HTMLElement> = Pick<
 export function useModal<T extends HTMLElement = HTMLDivElement>(
   options: UseModalOptions,
 ): UseModalReturn<T> {
-  const { isOpen = true, onClose } = options;
+  const { onClose, closeOnEsc = true, closeOnOutsideClick = true } = options;
   const ref = useRef<T>(null);
 
-  useAriaHidden(isOpen, ref);
-  useFocusTrap({ ref, isOpen, onClose });
-
-  const onClick = useCallback<MouseEventHandler>((event) => {
-    // to avoid emitting click event on the overlay
-    event.stopPropagation();
-  }, []);
-
-  if (!isOpen) {
-    return {};
-  }
+  useAriaHidden(ref);
+  useFocusTrap({ ref, onClose, closeOnEsc, closeOnOutsideClick });
 
   return {
     role: "dialog",
     "aria-modal": true,
-    onClick,
     ref,
   };
 }
