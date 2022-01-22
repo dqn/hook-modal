@@ -1,5 +1,6 @@
 import { HTMLAttributes, RefObject, useRef } from "react";
 import { useAriaHidden } from "./useAriaHidden";
+import { useDisableScroll } from "./useDisableScroll";
 import { useFocusTrap } from "./useFocusTrap";
 
 type UseModalOptions = {
@@ -28,6 +29,7 @@ export function useModal<T extends HTMLElement = HTMLDivElement>(
 
   useAriaHidden(ref, isOpen);
   useFocusTrap({ ref, isOpen, onClose, closeOnEsc, closeOnOutsideClick });
+  useDisableScroll(ref, isOpen);
 
   return {
     role: "dialog",

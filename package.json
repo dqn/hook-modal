@@ -13,6 +13,7 @@
     "lint:eslint": "eslint ./src"
   },
   "devDependencies": {
+    "@types/body-scroll-lock": "^3.1.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
@@ -45,6 +46,7 @@
   ],
   "dependencies": {
     "aria-hidden": "^1.1.3",
+    "body-scroll-lock": "3.1.5",
     "focus-trap": "^6.7.2"
   }
 }
