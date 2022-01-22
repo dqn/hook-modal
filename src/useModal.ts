@@ -25,7 +25,7 @@ export function useModal<T extends HTMLElement = HTMLDivElement>(
     closeOnEsc = true,
     closeOnOutsideClick = true,
   } = options;
-  const ref = useRef<null | T>(null);
+  const ref = useRef<T>(null);
 
   useAriaHidden(ref, isOpen);
   useFocusTrap({ ref, isOpen, onClose, closeOnEsc, closeOnOutsideClick });

@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from "react";
 import { createFocusTrap } from "focus-trap";
 
-type UseModalKeyEventOptions = {
+type UseFocusTrapOptions = {
   ref: RefObject<HTMLElement>;
   isOpen: boolean;
   onClose: () => void;
@@ -9,10 +9,8 @@ type UseModalKeyEventOptions = {
   closeOnEsc: boolean;
 };
 
-export function useFocusTrap(options: UseModalKeyEventOptions): void {
-  const { ref, isOpen, onClose, closeOnEsc, closeOnOutsideClick } = {
-    ...options,
-  };
+export function useFocusTrap(options: UseFocusTrapOptions): void {
+  const { ref, isOpen, onClose, closeOnEsc, closeOnOutsideClick } = options;
 
   useEffect(() => {
     if (!isOpen || ref.current === null) {
@@ -24,21 +22,7 @@ export function useFocusTrap(options: UseModalKeyEventOptions): void {
       clickOutsideDeactivates: closeOnOutsideClick,
       escapeDeactivates: closeOnEsc,
     });
-
-    try {
-      trap.activate();
-    } catch (err) {
-      if (!(err instanceof Error)) {
-        throw err;
-      }
-
-      if (/at least one tabbable node/.test(err.message)) {
-        // ignore no tabbables error
-        return;
-      }
-
-      throw err;
-    }
+    trap.activate();
 
     return () => {
       trap.deactivate();
