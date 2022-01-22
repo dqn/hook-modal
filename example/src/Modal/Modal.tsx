@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { useModal } from "../../../src";
+import { useModal } from "hook-modal";
 import classes from "./Modal.module.css";
 
 type Props = {
