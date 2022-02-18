@@ -323,6 +323,11 @@ aria-hidden@^1.1.3:
   dependencies:
     tslib "^1.0.0"
 
+body-scroll-lock@3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/body-scroll-lock/-/body-scroll-lock-3.1.5.tgz#c1392d9217ed2c3e237fee1e910f6cdd80b7aaec"
+  integrity sha512-Yi1Xaml0EvNA0OYWxXiYNqY24AfWkbA6w5vxE7GWxtKfzIbZM+Qw+aSmkgsbWzbHiy/RCSkUZBplVxTA+E4jJg==
+
 browserslist@^4.17.5:
   version "4.19.1"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.19.1.tgz#4ac0435b35ab655896c31d53018b6dd5e9e4c9a3"
@@ -558,11 +563,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hook-modal@../hook-modal-v0.1.0.tgz:
-  version "0.1.0"
-  resolved "../hook-modal-v0.1.0.tgz#93db3335ed34623da680b272f6095cf7005811e7"
+hook-modal@../:
+  version "0.1.1"
   dependencies:
     aria-hidden "^1.1.3"
+    body-scroll-lock "3.1.5"
     focus-trap "^6.7.2"
 
 is-core-module@^2.8.1:
