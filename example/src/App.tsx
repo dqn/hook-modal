@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { Modal } from "./Modal";
 
-export const App: React.VFC = () => {
+export const App: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = useCallback(() => {
