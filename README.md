@@ -1,5 +1,7 @@
 # hook-modal
 
+> ⚠️ **Warning**: This package is no longer maintained. Please use @radix-ui/react-dialog instead.
+
 [![CI](https://github.com/dqn/hook-modal/workflows/CI/badge.svg)](https://github.com/dqn/hook-modal/actions)
 [![npm version](https://img.shields.io/npm/v/hook-modal.svg)](https://www.npmjs.com/package/hook-modal)
 
